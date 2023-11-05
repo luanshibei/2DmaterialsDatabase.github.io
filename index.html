@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			legend {
+			  background-color: #000;
+			  color: #ffffff;
+			  font-size: 60px;
+			  font-weight: 600;
+			  padding: 10px 10px;
+			  border: 40px solid;
+			  align="cneter"
+			}
+			fieldset {
+			    border: 5px solid balck;
+			    background-color: #f8f8f8;
+			    padding: 50px 50px;
+			  }
+			select {
+			  background-color: coral;
+			  color: black;
+			  font-size: 40px;
+			  font-weight: 600;
+			  padding: 6px 20px;
+			}
+			button {
+			  background-color: blue;
+			  color: aqua;
+			  font-size: 40px;
+			  font-weight: 600;
+			  padding: 20px 20px;
+			  align="center"
+			}
+			.table {
+			  background-color:palevioletred;
+			  color: #fff;
+			  font-size: 25px;
+			  font-weight: 200;
+			  padding: 3px 6px;
+			}
+		</style>
+	</head>
+	<body>
+		<fieldset style="width: 1300px;" align="center">
+			<legend align="cneter">2D Materials Online Database ABX<sub>3</sub></legend>
+			<font size="7px" color="black">Contact Us: </font>
+			<a href="http://alkemie.cloud/index.html"><font size="7" color="red">ALKEMIE TEAM</font></a><br><br>
+			<font size="7px" color="black">A:</font>
+			<select id="a" >
+				<option value="Al">Al</option>
+				<option value="Ga">Ga</option>
+				<option value="In">In</option>
+				<option value="Si">Si</option>
+				<option value="Ge">Ge</option>
+				<option value="Sn">Sn</option>
+				<option value="P">P</option>
+				<option value="As">As</option>
+				<option value="Sb">Sb</option>
+				<option value="Bi" selected>Bi</option>
+			</select>
+			<font size="7px" color="black">&nbsp&nbspB:</font>
+			<select id="b" >
+				<option value="Al">Al</option>
+				<option value="Ga">Ga</option>
+				<option value="In" selected>In</option>
+				<option value="Si">Si</option>
+				<option value="Ge">Ge</option>
+				<option value="Sn">Sn</option>
+				<option value="P">P</option>
+				<option value="As">As</option>
+				<option value="Sb">Sb</option>
+				<option value="Bi">Bi</option>
+			</select>
+			<font size="7px" color="black">&nbsp&nbspX:</font>
+			<select id="c" >
+				<option value="S">S</option>
+				<option value="Se">Se</option>
+				<option value="Te" selected>Te</option>
+			</select>
+			<font size="7px" color="black">&nbsp&nbsp&nbspGroup:</font>
+			<select id="d" >
+				<option value="P4" selected>P4</option>
+				<option value="P10">P10</option>
+				<option value="P11">P11</option>
+				<option value="P24">P24</option>
+				<option value="P72">P72</option>
+			</select>
+			<font size="7px" color="black">&nbsp&nbsp&nbsp</font>
+			<button class="run"  >research</button>
+			</fieldset>
+<!-- 			<font size="5px" color="red">Cite:</font><br>
+			<font size="5px" color="black">&nbsp&nbsp&nbspXXXXXXXXXXXXXXXXX</font><br> -->
+			<script src="../js/to16.js"></script>
+			<script>
+				const imagePath = "../img/"
+				let aEle = document.getElementById("a")
+				let bEle = document.getElementById("b")
+				let cEle = document.getElementById("c")
+				let dEle = document.getElementById("d")
+				let aValue = aEle.options[aEle.selectedIndex]
+				let bValue = bEle.options[bEle.selectedIndex]
+				let cValue = cEle.options[cEle.selectedIndex]
+				let dValue = dEle.options[dEle.selectedIndex]
+				let bt = document.querySelectorAll('button')
+				let dataName = aValue.text + bValue.text + cValue.text + dValue.text
+				let atomNumber, temp, firstName
+				bt[0].addEventListener('click', function(){
+					aEle = document.getElementById("a")
+					bEle = document.getElementById("b")
+					cEle = document.getElementById("c")
+					dEle = document.getElementById("d")
+					aValue = aEle.options[aEle.selectedIndex]
+					bValue = bEle.options[bEle.selectedIndex]
+					cValue = cEle.options[cEle.selectedIndex]
+					dValue = dEle.options[dEle.selectedIndex]
+					dataName = aValue.text + bValue.text + cValue.text + dValue.text
+					if (dValue.text === "P4"){
+						atomNumber = '1 1 3'
+					} else if (dValue.text === "P10" || dValue.text === "P72"){
+						atomNumber = '2 2 6'
+					} else if (dValue.text === "P11" || dValue.text === "P24"){
+						atomNumber = '4 4 12'
+					}
+					// Table 1
+					document.write('<table border="5px"  style="background-color:palevioletred; color: #fff;font-size: 25px;font-weight: 400;padding: 3px 6px;"   width="800px" height="200px" align="center" class="table"><tr><td>Coumpound</td><td>')
+					document.write(aValue.text + bValue.text + cValue.text +'<sub>3</sub>')
+					document.write('</td></tr><tr><td>Atom Number in Primitive Cell</td><td>')
+					document.write(atomNumber)
+					document.write('</td></tr><tr><td>Space Group</td><td>')
+					document.write(dValue.text)
+					document.write('</td></tr></table><br>')
+					firstName = get16(dataName)
+					document.write('</td></tr></table><br>')
+					// table 2
+					
+					document.write('<table border="5px" width="2000px"  height="200px" align="center" class="table" style="background-color: pink;color: #fff;font-size: 25px;font-weight: 200;padding: 3px 6px;">')
+					document.write('<tr><td rowspan="3"  style="font-size: 25px;  font-weight: bold;" align="center">Lattice Parameter a</td><td>')
+				
+					imageWay = imagePath + firstName
+					temp = imageWay + "jgax.jpg"
+					document.write('<img  src="' + temp + '"  alt="there may have no this material in our work"/>')
+					document.write('</td><td rowspan="3"  style="font-size: 25px;  font-weight: bold;" align="center" >Lattice Parameter b</td><td>')
+					temp = imageWay + "jgbx.jpg"
+					document.write('<img  src="' + temp + '"/>')
+					document.write('</td><td rowspan="3"  style="font-size: 25px;  font-weight: bold;" align="center" >Lattice Parameter c</td><td>')
+					temp = imageWay + "jgcx.jpg"
+					document.write('<img  src="' + temp + '"/>')
+					document.write('</td></tr><tr><td>')
+					temp = imageWay + "jgay.jpg"
+					document.write('<img  src="' + temp + '"/>')
+					document.write('</td><td>')
+					temp = imageWay + "jgby.jpg"
+					document.write('<img  src="' + temp + '"/>')
+					document.write('</td><td>')
+					temp = imageWay + "jgcy.jpg"
+					document.write('<img  src="' + temp + '"/>')
+					document.write('</td></tr><tr><td>')
+					temp = imageWay + "jgaz.jpg"
+					document.write('<img  src="' + temp + '"/>')
+					document.write('</td><td>')
+					temp = imageWay + "jgbz.jpg"
+					document.write('<img  src="' + temp + '"/>')
+					document.write('</td><td>')
+					temp = imageWay + "jgcz.jpg"
+					document.write('<img  src="' + temp + '"/>')
+					document.write('</td></tr></table><br>')
+					// table 3    style="font-size: 25px;  font-weight: bold;" style="font-size: 25px;  font-weight: bold;" width="200px"
+					document.write('<table border="5px" width="2000px" height="200px" align="center" style="background-color: skyblue;color: #fff;font-size: 25px;font-weight: 200;padding: 3px 6px;" ><tr><td rowspan="3"  style="font-size: 25px;  font-weight: bold;" width="200px" align="center" >')
+					document.write(aValue.text + ' atom1')
+					document.write('</td><td>')
+					temp = imageWay + "11a.jpg"
+					document.write('<img  src="' + temp + '"/>')
+					document.write('</td><td rowspan="3"  style="font-size: 25px;  font-weight: bold;" width="200px" align="center" >')
+					document.write(bValue.text + ' atom1')
+					document.write('</td><td>')
+					temp = imageWay + "21a.jpg"
+					document.write('<img  src="' + temp + '"/>')
+					document.write('</td><td rowspan="3"  style="font-size: 25px;  font-weight: bold;" width="200px" align="center" >')
+					document.write(cValue.text + ' atom1')
+					document.write('</td><td>')
+					temp = imageWay + "31a.jpg"
+					document.write('<img  src="' + temp + '"/>')
+					document.write('</td><td rowspan="3"  style="font-size: 25px;  font-weight: bold;" width="200px" align="center" >')
+					document.write(cValue.text + ' atom2')
+					document.write('</td><td>')
+					temp = imageWay + "32a.jpg"
+					document.write('<img  src="' + temp + '"/>')
+					document.write('</td><td rowspan="3"  style="font-size: 25px;  font-weight: bold;" width="200px" align="center" >')
+					document.write(cValue.text + ' atom3')
+					document.write('</td><td>')
+					temp = imageWay + "33a.jpg"
+					document.write('<img  src="' + temp + '"/>')
+					document.write('</td></tr><tr><td>')
+					temp = imageWay + "11b.jpg"
+					document.write('<img  src="' + temp + '"/>')
+					document.write('</td><td>')
+					temp = imageWay + "21b.jpg"
+					document.write('<img  src="' + temp + '"/>')
+					document.write('</td><td>')
+					temp = imageWay + "31b.jpg"
+					document.write('<img  src="' + temp + '"/>')
+					document.write('</td><td>')
+					temp = imageWay + "32b.jpg"
+					document.write('<img  src="' + temp + '"/>')
+					document.write('</td><td>')
+					temp = imageWay + "33b.jpg"
+					document.write('<img  src="' + temp + '"/>')
+					document.write('</td></tr><tr><td>')
+					temp = imageWay + "11c.jpg"
+					document.write('<img  src="' + temp + '"/>')
+					document.write('</td><td>')
+					temp = imageWay + "21c.jpg"
+					document.write('<img  src="' + temp + '"/>')
+					document.write('</td><td>')
+					temp = imageWay + "31c.jpg"
+					document.write('<img  src="' + temp + '"/>')
+					document.write('</td><td>')
+					temp = imageWay + "32c.jpg"
+					document.write('<img  src="' + temp + '"/>')
+					document.write('</td><td>')
+					temp = imageWay + "33c.jpg"
+					document.write('<img  src="' + temp + '"/>')
+					document.write('</td></tr></table><br>')
+					if (dValue.text === "P10" || dValue.text === "P72" || dValue.text === "P11" || dValue.text === "P24"){
+						// table 4
+						document.write('<table border="5px" width="2000px" height="200px" align="center" style="background-color: skyblue;color: #fff;font-size: 25px;font-weight: 200;padding: 3px 6px;" ><tr><td rowspan="3"  style="font-size: 25px;  font-weight: bold;" width="200px" align="center" >')
+						document.write(aValue.text + ' atom2')
+						document.write('</td><td>')
+						temp = imageWay + "12a.jpg"
+						document.write('<img  src="' + temp + '"/>')
+						document.write('</td><td rowspan="3"  style="font-size: 25px;  font-weight: bold;" width="200px" align="center" >')
+						document.write(bValue.text + ' atom2')
+						document.write('</td><td>')
+						temp = imageWay + "22a.jpg"
+						document.write('<img  src="' + temp + '"/>')
+						document.write('</td><td rowspan="3"  style="font-size: 25px;  font-weight: bold;" width="200px" align="center" >')
+						document.write(cValue.text + ' atom4')
+						document.write('</td><td>')
+						temp = imageWay + "34a.jpg"
+						document.write('<img  src="' + temp + '"/>')
+						document.write('</td><td rowspan="3"  style="font-size: 25px;  font-weight: bold;" width="200px" align="center" >')
+						document.write(cValue.text + ' atom5')
+						document.write('</td><td>')
+						temp = imageWay + "35a.jpg"
+						document.write('<img  src="' + temp + '"/>')
+						document.write('</td><td rowspan="3"  style="font-size: 25px;  font-weight: bold;" width="200px" align="center" >')
+						document.write(cValue.text + ' atom6')
+						document.write('</td><td>')
+						temp = imageWay + "36a.jpg"
+						document.write('<img  src="' + temp + '"/>')
+						document.write('</td></tr><tr><td>')
+						temp = imageWay + "12b.jpg"
+						document.write('<img  src="' + temp + '"/>')
+						document.write('</td><td>')
+						temp = imageWay + "22b.jpg"
+						document.write('<img  src="' + temp + '"/>')
+						document.write('</td><td>')
+						temp = imageWay + "34b.jpg"
+						document.write('<img  src="' + temp + '"/>')
+						document.write('</td><td>')
+						temp = imageWay + "35b.jpg"
+						document.write('<img  src="' + temp + '"/>')
+						document.write('</td><td>')
+						temp = imageWay + "36b.jpg"
+						document.write('<img  src="' + temp + '"/>')
+						document.write('</td></tr><tr><td>')
+						temp = imageWay + "12c.jpg"
+						document.write('<img  src="' + temp + '"/>')
+						document.write('</td><td>')
+						temp = imageWay + "22c.jpg"
+						document.write('<img  src="' + temp + '"/>')
+						document.write('</td><td>')
+						temp = imageWay + "34c.jpg"
+						document.write('<img  src="' + temp + '"/>')
+						document.write('</td><td>')
+						temp = imageWay + "35c.jpg"
+						document.write('<img  src="' + temp + '"/>')
+						document.write('</td><td>')
+						temp = imageWay + "36c.jpg"
+						document.write('<img  src="' + temp + '"/>')
+						document.write('</td></tr></table><br>')
+						console.log(imageWay)
+						if (dValue.text === "P11" || dValue.text === "P24"){
+							// table 5
+							document.write('<table border="5px" width="2000px" height="200px" align="center" style="background-color: skyblue;color: #fff;font-size: 25px;font-weight: 200;padding: 3px 6px;" ><tr><td rowspan="3"  style="font-size: 25px;  font-weight: bold;" width="200px" align="center" >')
+							document.write(aValue.text + ' atom3')
+							document.write('</td><td>')
+							temp = imageWay + "13a.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td><td rowspan="3"  style="font-size: 25px;  font-weight: bold;" width="200px" align="center" >')
+							document.write(bValue.text + ' atom3')
+							document.write('</td><td>')
+							temp = imageWay + "23a.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td><td rowspan="3"  style="font-size: 25px;  font-weight: bold;" width="200px" align="center" >')
+							document.write(cValue.text + ' atom7')
+							document.write('</td><td>')
+							temp = imageWay + "37a.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td><td rowspan="3"  style="font-size: 25px;  font-weight: bold;" width="200px" align="center" >')
+							document.write(cValue.text + ' atom8')
+							document.write('</td><td>')
+							temp = imageWay + "38a.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td><td rowspan="3"  style="font-size: 25px;  font-weight: bold;" width="200px" align="center" >')
+							document.write(cValue.text + ' atom9')
+							document.write('</td><td>')
+							temp = imageWay + "39a.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td></tr><tr><td>')
+							temp = imageWay + "13b.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td><td>')
+							temp = imageWay + "23b.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td><td>')
+							temp = imageWay + "37b.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td><td>')
+							temp = imageWay + "38b.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td><td>')
+							temp = imageWay + "39b.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td></tr><tr><td>')
+							temp = imageWay + "13c.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td><td>')
+							temp = imageWay + "23c.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td><td>')
+							temp = imageWay + "37c.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td><td>')
+							temp = imageWay + "38c.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td><td>')
+							temp = imageWay + "39c.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td></tr></table><br>')
+								
+							// table 6
+							document.write('<table border="5px" width="2000px" height="200px" align="center"  style="background-color: skyblue;color: #fff;font-size: 25px;font-weight: 200;padding: 3px 6px;"><tr><td rowspan="3"  style="font-size: 25px;  font-weight: bold;" width="200px" align="center" >')
+							document.write(aValue.text + ' atom4')
+							document.write('</td><td>')
+							temp = imageWay + "14a.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td><td rowspan="3"  style="font-size: 25px;  font-weight: bold;" width="200px" align="center" >')
+							document.write(bValue.text + ' atom4')
+							document.write('</td><td>')
+							temp = imageWay + "24a.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td><td rowspan="3"  style="font-size: 25px;  font-weight: bold;" width="200px" align="center" >')
+							document.write(cValue.text + ' atom10')
+							document.write('</td><td>')
+							temp = imageWay + "310a.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td><td rowspan="3"  style="font-size: 25px;  font-weight: bold;" width="200px" align="center" >')
+							document.write(cValue.text + ' atom11')
+							document.write('</td><td>')
+							temp = imageWay + "311a.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td><td rowspan="3"  style="font-size: 25px;  font-weight: bold;" width="200px" align="center" >')
+							document.write(cValue.text + ' atom12')
+							document.write('</td><td>')
+							temp = imageWay + "312a.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td></tr><tr><td>')
+							temp = imageWay + "14b.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td><td>')
+							temp = imageWay + "24b.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td><td>')
+							temp = imageWay + "310b.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td><td>')
+							temp = imageWay + "311b.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td><td>')
+							temp = imageWay + "312b.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td></tr><tr><td>')
+							temp = imageWay + "14c.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td><td>')
+							temp = imageWay + "24c.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td><td>')
+							temp = imageWay + "310c.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td><td>')
+							temp = imageWay + "311c.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td><td>')
+							temp = imageWay + "312c.jpg"
+							document.write('<img  src="' + temp + '"/>')
+							document.write('</td></tr></table><br>')
+							
+							
+							
+						
+						}
+					}
+					
+					document.write('<div align="center" ><button id="refreshBtn"  align="center" style="background-color: #efdc05; color: black; font-size: 40px; font-weight: 300;  padding: 20px 20px; ">Back</button></div>')
+					refreshBtn = document.getElementById("refreshBtn");
+					refreshBtn.onclick = function() {
+					location.reload();
+					};
+					document.write('<br><div align="center"><font size="5px" color="black">If the material you chose is out of our work, there will be nothing to show.</font></div>')
+					
+					
+					})
+				
+		</script>
+	</body>
+</html>
